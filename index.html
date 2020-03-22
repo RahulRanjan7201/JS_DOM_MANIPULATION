@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Javascript DOM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .bigger {
+        font-size: 3em;
+        font-family: cursive;
+      }
+      .padded {
+        padding: 20px;
+      }
+      .borderAdd {
+        border:  3px dotted blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+    <div>Hello World</div>
+    <p>Rahul Ranjan</p>
+    <span>Javascript</span>
+  </div>
+    <input type="text" name="firstName" value="John" />
+    <br>
+    Background : <input type="color" name="bg">
+    <br>
+    Text Color : <input type="color" name="txt">
+    Toggle Classes <select name="classes"></select>
+    <button class="btn">Update</button>
+    <script>
+      let nodeListed;
+      const classArray = ["padded","bigger", "borderAdd"];
+      document.addEventListener("DOMContentLoaded", () => {
+
+        classArray.forEach((item) => {
+         let opt = document.createElement("option");
+         opt.value = item;
+         opt.innerHTML = item;
+         selectClasses.appendChild(opt);
+        })
+        nodeListed = document.querySelectorAll("#main")
+
+      })
+      const selectClasses = document.querySelector("select[name=classes]")
+      const selectElement = document.querySelector("div");
+      const selectInput = document.querySelector("input[name=firstName]");
+      const selectBackGround = document.querySelector("input[name=bg]");
+      const selectText = document.querySelector("input[name=txt]");
+      const buttonSelector = document.querySelector(".btn");
+      buttonSelector.addEventListener("click",(event)=> {
+        selectElement.textContent = selectInput.value;
+        selectElement.style.backgroundColor = selectBackGround.value;
+        selectElement.style.color =  selectText.value;
+        selectElement.classList.toggle(selectClasses.value);
+      })
+    </script>
+  </body>
+</html>
