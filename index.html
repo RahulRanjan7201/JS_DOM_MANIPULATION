@@ -19,11 +19,15 @@
     </style>
   </head>
   <body>
+    Add Element: <select name="addElement"></select>
+    <button name="adder">Add</button>
     <div id="main">
     <div>Hello World</div>
     <p>Rahul Ranjan</p>
     <span>Javascript</span>
   </div>
+  Select Element<select name="eleMaker"></select>
+<br> Inner Text
     <input type="text" name="firstName" value="John" />
     <br>
     Background : <input type="color" name="bg">
@@ -33,6 +37,7 @@
     <button class="btn">Update</button>
     <script>
       let nodeListed;
+     
       const classArray = ["padded","bigger", "borderAdd"];
       document.addEventListener("DOMContentLoaded", () => {
 
@@ -42,21 +47,52 @@
          opt.innerHTML = item;
          selectClasses.appendChild(opt);
         })
-        nodeListed = document.querySelectorAll("#main")
-
+        elementArray.forEach((item) => {
+         let opt = document.createElement("option");
+         opt.value = item;
+         opt.innerHTML = item;
+         addElement.appendChild(opt);
+        })
+        nodeListed = document.querySelectorAll("#main >*")
+        dropDownBuiler();
       })
+      const main = document.querySelector("#main");
+      const elementArray = ["div","p","span"];
       const selectClasses = document.querySelector("select[name=classes]")
+      const eleMaker = document.querySelector("select[name=eleMaker]")
+      const addElement = document.querySelector("select[name=addElement]")
+      const adder = document.querySelector("button[name=adder]")
       const selectElement = document.querySelector("div");
       const selectInput = document.querySelector("input[name=firstName]");
       const selectBackGround = document.querySelector("input[name=bg]");
       const selectText = document.querySelector("input[name=txt]");
       const buttonSelector = document.querySelector(".btn");
-      buttonSelector.addEventListener("click",(event)=> {
-        selectElement.textContent = selectInput.value;
-        selectElement.style.backgroundColor = selectBackGround.value;
-        selectElement.style.color =  selectText.value;
-        selectElement.classList.toggle(selectClasses.value);
+      adder.addEventListener("click", (event) => {
+        console.log(addElement.value)
+        let  temp= document.createElement(addElement.value);
+        temp.textContent = addElement.value;
+        main.appendChild(temp);
+        dropDownBuiler();
+
       })
+      buttonSelector.addEventListener("click",(event)=> {
+        let tempElement = nodeListed[eleMaker.value];
+        tempElement.textContent = selectInput.value;
+        tempElement.style.backgroundColor = selectBackGround.value;
+        tempElement.style.color =  selectText.value;
+        tempElement.classList.toggle(selectClasses.value);
+      })
+
+      function dropDownBuiler() {
+        eleMaker.innerHTML = "";
+        nodeListed = document.querySelectorAll("#main >*")
+        nodeListed.forEach((item, index) => {
+            let opt = document.createElement("option");
+            opt.value = index;
+            opt.innerHTML = item.tagName;
+            eleMaker.appendChild(opt)
+        })
+      }
     </script>
   </body>
 </html>
