@@ -54,6 +54,7 @@
          addElement.appendChild(opt);
         })
         nodeListed = document.querySelectorAll("#main >*")
+        removerElements();
         dropDownBuiler();
       })
       const main = document.querySelector("#main");
@@ -82,7 +83,15 @@
         tempElement.style.color =  selectText.value;
         tempElement.classList.toggle(selectClasses.value);
       })
-
+      function removerElements() {
+        nodeListed.forEach((item) => {
+          item.addEventListener("click" , (e) => {
+            console.log(this);
+            main.remove(this);
+            dropDownBuiler()
+          })
+        })
+      }
       function dropDownBuiler() {
         eleMaker.innerHTML = "";
         nodeListed = document.querySelectorAll("#main >*")
